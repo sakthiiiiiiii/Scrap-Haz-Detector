@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Setup: create .venv and install dependencies",
+      "type": "shell",
+      "command": "python3 -m venv .venv && .venv/bin/python -m pip install -r requirements-dev.txt",
+      "windows": {
+        "command": "python -m venv .venv; .venv\\Scripts\\python.exe -m pip install -r requirements-dev.txt"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "2. Run server",
+      "type": "shell",
+      "command": ".venv/bin/python run.py",
+      "windows": { "command": ".venv\\Scripts\\python.exe run.py" },
+      "problemMatcher": [],
+      "isBackground": true
+    }
+  ]
+}

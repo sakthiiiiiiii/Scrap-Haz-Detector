@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scrap Haz Detector</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+  <div id="flash" class="flash" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <div>
+        <h1>Scrap Haz Detector</h1>
+        <p>Scrap yard sorting station</p>
+      </div>
+    </div>
+    <div class="pills">
+      <span class="pill" id="pill-model"><i class="dot"></i><span id="model-text">Checking model…</span></span>
+      <span class="pill">FPS <b id="fps">--</b></span>
+      <span class="pill">Latency <b id="latency">--</b></span>
+      <span class="pill">Session <b id="session-time">00:00:00</b></span>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="feed">
+      <div class="stage-wrap" id="stage-wrap">
+        <div class="stage" id="stage">
+          <video id="video" playsinline muted autoplay hidden></video>
+          <img id="still" alt="Captured frame" hidden>
+          <canvas id="overlay"></canvas>
+          <div class="stage-empty" id="stage-empty">
+            <div class="reticle" aria-hidden="true"></div>
+            <p>No image source</p>
+            <small>Start the camera or upload a photo</small>
+          </div>
+          <span class="live-tag" id="live-tag" hidden>LIVE</span>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button class="btn primary" id="btn-start">Start camera</button>
+        <button class="btn" id="btn-capture" disabled>Capture photo</button>
+        <button class="btn" id="btn-resume" hidden>Resume live</button>
+        <label class="btn" for="file-input">Upload image</label>
+        <input type="file" id="file-input" accept="image/*" hidden>
+
+        <label class="slider">Confidence
+          <input type="range" id="conf" min="0.10" max="0.90" step="0.05" value="0.25">
+          <b id="conf-val">25%</b>
+        </label>
+        <label class="check"><input type="checkbox" id="sound" checked> Alert sound</label>
+        <button class="btn small" id="btn-test">Test alert</button>
+      </div>
+      <p class="msg" id="msg" hidden></p>
+    </section>
+
+    <aside class="side">
+      <section class="banner" id="banner" data-state="idle" role="status" aria-live="polite">
+        <div class="banner-icon" id="banner-icon" aria-hidden="true">i</div>
+        <div>
+          <h2 id="banner-title">Standby</h2>
+          <p id="banner-text">Start the camera or upload a photo to begin sorting.</p>
+          <span class="route" id="banner-route" hidden></span>
+        </div>
+      </section>
+
+      <section class="counters">
+        <h3>Sorting route counter <small>this session</small></h3>
+        <div class="count-grid">
+          <div class="count shock"><span>Shock absorbers</span><b id="count-shock">0</b><em>→ Depressurization</em></div>
+          <div class="count cyl"><span>Cylinders</span><b id="count-cyl">0</b><em>→ Metal crusher</em></div>
+        </div>
+        <div class="count-foot">Total items <b id="count-total">0</b>
+          <button class="btn small" id="btn-reset">Reset session</button>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <footer>AI-assisted classification. Operators must visually confirm every item before crushing, cutting or puncturing.</footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
